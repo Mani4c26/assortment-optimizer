@@ -1,8 +1,3 @@
-# Production-Ready Streamlit Assortment Optimizer
-
-Replace your existing `app.py` completely with the code below.
-
-```python
 import streamlit as st
 import pandas as pd
 import numpy as np
