@@ -11,7 +11,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📦 Assortment Optimization Engine")
+st.title("📦 Loose to Pack  - Loose Pair Reduction")
 st.caption("Production Planning + Inventory Utilization + Assortment Recommendation")
 
 # =====================================================================
@@ -173,6 +173,7 @@ if mapping_file and assort_file and stock_file:
             total_articles = mapping['Art_Col'].nunique()
             total_stock = stock['Qty'].sum()
             total_locations = stock['Location'].nunique()
+            
 
             col1, col2, col3 = st.columns(3)
 
