@@ -593,5 +593,3 @@ if mapping_file and assort_file and stock_file:
 else:
 
     st.info("Please upload all 3 CSV files from the sidebar to begin analysis.")
-✅ Large Table Viewer
-✅ Cleaner Recommendations
