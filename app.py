@@ -537,7 +537,7 @@ if mapping_file and assort_file and stock_file:
                 ]
             )
 
-            col1.metric("Complete Packs", complete_count)
+            col1.metric("Complete Packs", complete_packs)
             col2.metric("Best Options", best_count)
             col3.metric("Alternative Choices", alt_count)
 
