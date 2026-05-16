@@ -521,11 +521,9 @@ if mapping_file and assort_file and stock_file:
 
             col1, col2, col3 = st.columns(3)
 
-            complete_count = len(
-                final_df[
-                    final_df['Status'] == 'Complete'
-                ]
-            )
+            complete_packs = final_df[
+    final_df['Status'] == 'Complete'
+]['Current Packs'].sum()
 
             best_count = len(
                 final_df[
