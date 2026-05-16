@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -516,64 +517,31 @@ if mapping_file and assort_file and stock_file:
             # DASHBOARD
             # =============================================================
 
-          st.subheader("Operational Dashboard")
+            st.subheader("Dashboard")
 
-            total_inventory = stock['Qty'].sum()
-            
-            complete_df = final_df[
-                final_df['Status'] == 'Complete'
-            ]
-            
-            best_df = final_df[
-                final_df['Status'] == 'Best Option'
-            ]
-            
-            complete_packs = complete_df['Current Packs'].sum()
-            
-            complete_pairs_consumed = (
-                complete_df['Current Packs']
-                * complete_df['Pack Size']
-            ).sum()
-            
-            best_unlock_pairs = best_df['Pack Size'].sum()
-            
-            best_gap_qty = best_df['Gap Qty'].sum()
-            
-            best_instances = len(best_df)
-            
             col1, col2, col3 = st.columns(3)
-            
-            col1.metric(
-                "Total Inventory",
-                f"{int(total_inventory):,} Pairs"
+
+            complete_count = len(
+                final_df[
+                    final_df['Status'] == 'Complete'
+                ]
             )
-            
-            col2.metric(
-                "Complete Packs Possible",
-                f"{int(complete_packs):,}"
+
+            best_count = len(
+                final_df[
+                    final_df['Status'] == 'Best Option'
+                ]
             )
-            
-            col3.metric(
-                "Pairs Consumed (Complete)",
-                f"{int(complete_pairs_consumed):,}"
+
+            alt_count = len(
+                final_df[
+                    final_df['Status'] == 'Alternative Choice'
+                ]
             )
-            
-            col4, col5, col6 = st.columns(3)
-            
-            col4.metric(
-                "Best Option Instances",
-                f"{int(best_instances):,}"
-            )
-            
-            col5.metric(
-                "Production Needed",
-                f"{int(best_gap_qty):,} Pairs"
-            )
-            
-            col6.metric(
-                "Additional Pairs Unlockable",
-                f"{int(best_unlock_pairs):,} Pairs"
-            )
+
+            col1.metric("Complete Packs", complete_count)
+            col2.metric("Best Options", best_count)
+            col3.metric("Alternative Choices", alt_count)
 
             # =============================================================
             # FILTERS
@@ -625,3 +593,5 @@ if mapping_file and assort_file and stock_file:
 else:
 
     st.info("Please upload all 3 CSV files from the sidebar to begin analysis.")
+✅ Large Table Viewer
+✅ Cleaner Recommendations
