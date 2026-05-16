@@ -526,7 +526,8 @@ if mapping_file and assort_file and stock_file:
             ]
 
             best_df = final_df[
-                final_df['Status'] == 'Best Option'
+                (final_df['Status'] == 'Best Option') &
+                (final_df['Efficiency'] < 0.2)
             ]
 
             complete_packs = complete_df['Current Packs'].sum()
