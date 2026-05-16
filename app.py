@@ -516,31 +516,64 @@ if mapping_file and assort_file and stock_file:
             # DASHBOARD
             # =============================================================
 
-            st.subheader("Dashboard")
+          st.subheader("Operational Dashboard")
 
-            col1, col2, col3 = st.columns(3)
+total_inventory = stock['Qty'].sum()
 
-            complete_count = len(
-                final_df[
-                    final_df['Status'] == 'Complete'
-                ]
-            )
+complete_df = final_df[
+    final_df['Status'] == 'Complete'
+]
 
-            best_count = len(
-                final_df[
-                    final_df['Status'] == 'Best Option'
-                ]
-            )
+best_df = final_df[
+    final_df['Status'] == 'Best Option'
+]
 
-            alt_count = len(
-                final_df[
-                    final_df['Status'] == 'Alternative Choice'
-                ]
-            )
+complete_packs = complete_df['Current Packs'].sum()
 
-            col1.metric("Complete Packs", complete_count)
-            col2.metric("Best Options", best_count)
-            col3.metric("Alternative Choices", alt_count)
+complete_pairs_consumed = (
+    complete_df['Current Packs']
+    * complete_df['Pack Size']
+).sum()
+
+best_unlock_pairs = best_df['Pack Size'].sum()
+
+best_gap_qty = best_df['Gap Qty'].sum()
+
+best_instances = len(best_df)
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric(
+    "Total Inventory",
+    f"{int(total_inventory):,} Pairs"
+)
+
+col2.metric(
+    "Complete Packs Possible",
+    f"{int(complete_packs):,}"
+)
+
+col3.metric(
+    "Pairs Consumed (Complete)",
+    f"{int(complete_pairs_consumed):,}"
+)
+
+col4, col5, col6 = st.columns(3)
+
+col4.metric(
+    "Best Option Instances",
+    f"{int(best_instances):,}"
+)
+
+col5.metric(
+    "Production Needed",
+    f"{int(best_gap_qty):,} Pairs"
+)
+
+col6.metric(
+    "Additional Pairs Unlockable",
+    f"{int(best_unlock_pairs):,} Pairs"
+)
 
             # =============================================================
             # FILTERS
